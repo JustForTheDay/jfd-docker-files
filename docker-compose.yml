@@ -6,6 +6,7 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+    restart: unless-stopped
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -21,6 +22,7 @@ services:
     container_name: kafka
     ports:
       - "9092:9092"
+    restart: unless-stopped
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -41,6 +43,7 @@ services:
     container_name: kafka-ui
     ports:
       - "8080:8080" # Map host port 8080 to container port 8080 for the UI
+    restart: unless-stopped
     environment:
       KAFKA_CLUSTERS_0_NAME: LocalKafkaCluster # Name that will appear in the UI
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092 # How Kafka-UI connects to Kafka *within the Docker network*
